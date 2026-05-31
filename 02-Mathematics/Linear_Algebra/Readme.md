@@ -1,7 +1,5 @@
 # Linear Algebra for Machine Learning
 
-Li
-
 ## Topics Covered
 
 ### 1. [Vectors and Matrices](Vectors_and_Matrices.md)

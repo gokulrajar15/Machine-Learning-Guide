@@ -14,6 +14,23 @@ It's used to represent and manipulate data mathematically.
 - [Span](#span)
 - [Linear Dependence and Independence](#linear-dependence-and-independence)
 - [Linear Transformations](#linear-transformations)
+- [Matrices](#matrices)
+- [Matrix Composition](#matrix-composition)
+  - [Numerical Computation](#numerical-computation)
+  - [Properties of Matrix Multiplication](#properties-of-matrix-multiplication)
+- [Determinant](#determinant)
+  - [Key Determinant Values](#key-determinant-values)
+  - [Determinant in 3D](#determinant-in-3d)
+  - [2×2 Formula Intuition](#2x2-formula-intuition)
+- [Inverse Matrices, Column Space & Null Space](#inverse-matrices-column-space--null-space)
+  - [Linear Systems of Equations](#linear-systems-of-equations)
+  - [Inverse Matrices](#inverse-matrices)
+  - [Rank & Column Space](#rank--column-space)
+  - [Null Space (Kernel)](#null-space-kernel)
+- [Dot Products & Duality](#dot-products--duality)
+  - [Geometric Interpretation](#geometric-interpretation)
+  - [Symmetry of the Dot Product](#symmetry-of-the-dot-product)
+  - [Duality](#duality)
 
 ---
 
@@ -187,5 +204,294 @@ But remember:
 A transformation is linear only if it also preserves scalar multiplication:
 
 $$T(c\vec{v}) = cT(\vec{v})$$
+
+</details>
+
+---
+
+## Matrices
+
+A **matrix** is a rectangular array of numbers arranged in rows and columns. It encodes a linear transformation by storing where the basis vectors land after the transformation.
+
+> **Key Insight:** A 2×2 matrix stores the transformed $\hat{i}$ as its first column and the transformed $\hat{j}$ as its second column. The transformation is entirely determined by these two columns.
+
+<details>
+<summary><strong>📐 Matrix Representation</strong></summary>
+
+A 2×2 matrix representing a linear transformation:
+
+$$M = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$$
+
+Where:
+- First column $\begin{bmatrix} a \\ c \end{bmatrix}$ = where $\hat{i}$ lands
+- Second column $\begin{bmatrix} b \\ d \end{bmatrix}$ = where $\hat{j}$ lands
+
+Applying this to a vector $\vec{v} = \begin{bmatrix} x \\ y \end{bmatrix}$:
+
+$$M\vec{v} = x \begin{bmatrix} a \\ c \end{bmatrix} + y \begin{bmatrix} b \\ d \end{bmatrix} = \begin{bmatrix} ax + by \\ cx + dy \end{bmatrix}$$
+
+</details>
+
+---
+
+## Matrix Composition
+
+Matrix composition captures the idea of applying multiple linear transformations **sequentially** and representing the combined effect as a single matrix.
+
+> **Core Idea:** If you rotate the plane and then shear it, the net effect is itself a linear transformation — representable by one matrix called the **composition**.
+
+### How It Works
+
+1. Apply the **right** matrix first (transforms basis vectors)
+2. Then apply the **left** matrix to the result
+3. The product matrix stores the final landing positions of $\hat{i}$ and $\hat{j}$
+
+> **Reading Order:** Matrix multiplication reads **right to left**, following function notation — $M_2 \cdot M_1$ means "apply $M_1$ first, then $M_2$".
+
+### Properties of Matrix Multiplication
+
+| Property | Statement | Intuition |
+|----------|-----------|----------|
+| **Non-commutative** | $AB \neq BA$ (in general) | Shear → Rotate ≠ Rotate → Shear; order changes the geometric outcome |
+| **Associative** | $A(BC) = (AB)C$ | Both sides mean: apply $C$, then $B$, then $A$ — same sequence, same result |
+
+<details>
+<summary><strong>🔄 Why Order Matters (Non-commutativity)</strong></summary>
+
+Consider a rotation $R$ and a shear $S$:
+
+- $R \cdot S$ → shear first, then rotate
+- $S \cdot R$ → rotate first, then shear
+
+These yield **different** final positions for the basis vectors, hence different matrices. Geometrically, the intermediate grid looks completely different depending on which transformation is applied first.
+
+</details>
+
+<details>
+<summary><strong>✅ Why Associativity Holds</strong></summary>
+
+$A(BC) = (AB)C$ because both expressions describe the same sequence of geometric actions:
+
+1. Transform by $C$
+2. Transform by $B$
+3. Transform by $A$
+
+Grouping doesn't change the sequence — only the intermediate "packaging" of partial compositions differs, not the final outcome.
+
+</details>
+
+---
+
+## Determinant
+
+The **determinant** of a matrix measures the factor by which a linear transformation scales areas (in 2D) or volumes (in 3D). It answers: "How much does the transformation stretch or squish space?"
+
+> **Geometric Definition:** Track the 1×1 unit square formed by $\hat{i}$ and $\hat{j}$. After transformation, whatever factor that square's area changes by — that's the determinant. All other regions scale by the same factor.
+
+$$\det\begin{bmatrix} a & b \\ c & d \end{bmatrix} = ad - bc$$
+
+### Key Determinant Values
+
+| Determinant Value | Geometric Meaning |
+|-------------------|-------------------|
+| $\det = 1$ | Area is preserved (no scaling) |
+| $\det = 3$ | Areas tripled |
+| $\det = 0$ | Space collapses to a line or point — columns are **linearly dependent** |
+| $\det < 0$ | Orientation is **flipped** (e.g., $\hat{j}$ ends up on the opposite side of $\hat{i}$) |
+
+> **Zero Determinant:** If $\det(M) = 0$, the transformation squishes all of 2D space onto a lower dimension (a line or point). This is equivalent to saying the columns of $M$ are linearly dependent.
+
+> **Negative Determinant:** The absolute value still tells you the area scaling factor, but the negative sign indicates the transformation inverts the orientation of space — like flipping a sheet of paper.
+
+### Determinant in 3D
+
+In 3D, the determinant measures **volume** scaling:
+
+- Track the 1×1×1 unit cube formed by $\hat{i}$, $\hat{j}$, $\hat{k}$
+- After transformation, it becomes a **parallelepiped**
+- The determinant = volume of that parallelepiped (with sign indicating orientation)
+
+| Sign | Meaning |
+|------|---------|
+| $\det > 0$ | Right-hand rule preserved |
+| $\det < 0$ | Orientation flipped (left-handed) |
+| $\det = 0$ | Volume squished to zero — space collapses to a plane, line, or point |
+
+### 2×2 Formula Intuition
+
+For $M = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$, the formula $ad - bc$ can be understood geometrically:
+
+<details>
+<summary><strong>📐 Breaking Down ad − bc</strong></summary>
+
+- $a$ and $d$ represent diagonal stretching — they scale the unit square along its natural axes → contribute to area growth ($ad$)
+- $b$ and $c$ represent off-diagonal shearing — they skew the square, effectively "stealing" area → subtract from the total ($bc$)
+
+The net signed area of the parallelogram formed by the transformed basis vectors = $ad - bc$.
+
+</details>
+
+### Composition Property
+
+$$\det(AB) = \det(A) \cdot \det(B)$$
+
+> **Intuition:** If $A$ scales areas by factor 3 and $B$ scales areas by factor 2, then applying $B$ then $A$ scales areas by $3 \times 2 = 6$. Successive scaling factors multiply.
+
+---
+
+## Inverse Matrices, Column Space & Null Space
+
+This section connects linear transformations to solving systems of equations and introduces the key subspaces associated with a matrix.
+
+### Linear Systems of Equations
+
+A system of linear equations is a collection of two or more linear equations involving the same variables, where we need to find values of the variables that satisfy all equations simultaneously.
+
+A system of linear equations can be expressed as a single matrix-vector equation:
+
+$$A\vec{x} = \vec{v}$$
+
+> **Geometric Interpretation:** Solving $A\vec{x} = \vec{v}$ means finding the vector $\vec{x}$ that, after being transformed by $A$, lands exactly on $\vec{v}$.
+
+<details>
+<summary><strong>🧮 Example</strong></summary>
+
+The system:
+$$2x + 5y + 3z = -3$$
+$$4x + 0y + 8z = 0$$
+$$1x + 3y + 0z = 2$$
+
+Becomes:
+
+$$\begin{bmatrix} 2 & 5 & 3 \\ 4 & 0 & 8 \\ 1 & 3 & 0 \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} = \begin{bmatrix} -3 \\ 0 \\ 2 \end{bmatrix}$$
+
+We seek the input vector that the transformation $A$ maps onto $\vec{v}$.
+
+</details>
+
+---
+
+### Inverse Matrices
+
+The **inverse** $A^{-1}$ is the unique transformation that undoes the action of $A$ — it "runs the transformation in reverse."
+
+$$A^{-1} A = I \quad \text{(Identity matrix — does nothing to space)}$$
+
+To solve $A\vec{x} = \vec{v}$:
+
+$$\vec{x} = A^{-1}\vec{v}$$
+
+| Condition | Inverse Exists? | Reason |
+|-----------|----------------|--------|
+| $\det(A) \neq 0$ | ✅ Yes | Space isn't collapsed — every output traces back to a unique input |
+| $\det(A) = 0$ | ❌ No | Space is squished to a lower dimension — you can't "unsquish" a line back into a plane |
+
+> **Why no inverse when det = 0?** A function can only map each input to a single output. If a transformation collapses 2D space onto a line, there's no function that maps each point on that line back to the unique original 2D point — multiple inputs collapsed onto the same output.
+
+---
+
+### Rank & Column Space
+
+**Column Space** — the set of all possible outputs of the transformation $A$. It is the span of the columns of the matrix (i.e., where the basis vectors can reach).
+
+**Rank** — the number of dimensions in the column space.
+
+In simple terms, the rank tells you how many dimensions after transformation. 
+| Rank | Output Space | Example (3×3 matrix) |
+|------|-------------|---------------------|
+| 1 | Line | All outputs collapse to a line |
+| 2 | Plane | All outputs collapse to a plane |
+| 3 (full rank) | All of 3D space | No collapse — inverse exists |
+
+> **Full Rank:** A matrix is full rank when its rank equals its number of columns. This means the transformation doesn't collapse any dimension, and the only vector that maps to the origin is $\vec{0}$ itself.
+
+---
+
+### Null Space (Kernel)
+
+The **null space** (or kernel) of a matrix $A$ is the set of all vectors that land on the **origin** after the transformation:
+
+$$\text{Null}(A) = \{\vec{x} \mid A\vec{x} = \vec{0}\}$$
+
+| Matrix Rank | Null Space |
+|-------------|------------|
+| Full rank | Only $\vec{0}$ (trivial) |
+| Rank 2 (in 3D) | A line of vectors squished to origin |
+| Rank 1 (in 3D) | A plane of vectors squished to origin |
+
+> **Connection to Systems:** When solving $A\vec{x} = \vec{0}$, the null space gives you the complete set of solutions. For non-full-rank matrices, this is an entire line or plane of vectors — not just the zero vector.
+
+<details>
+<summary><strong>💡 Geometric Intuition</strong></summary>
+
+If a 3D transformation squishes space onto a 2D plane (rank 2), then an entire line of vectors perpendicular to that plane gets collapsed to the origin. That line *is* the null space.
+
+If it squishes space onto a line (rank 1), then a whole plane of vectors gets collapsed to the origin — that plane is the null space.
+
+</details>
+
+---
+
+## Dot Products & Duality
+
+The **dot product** connects algebra (multiplying coordinates) with geometry (projecting vectors). It also reveals a deep relationship between vectors and linear transformations called **duality**.
+
+### Numerical Definition
+
+Multiply corresponding coordinates and sum:
+
+$$\vec{v} \cdot \vec{w} = v_1 w_1 + v_2 w_2$$
+
+**Example:** $(1, 2) \cdot (3, 4) = 1(3) + 2(4) = 11$
+
+### Geometric Interpretation
+
+The dot product equals the length of the projection of $\vec{v}$ onto $\vec{w}$, multiplied by the length of $\vec{w}$:
+
+$$\vec{v} \cdot \vec{w} = \|\vec{v}\| \cdot \|\vec{w}\| \cdot \cos\theta$$
+
+| Dot Product Value | Geometric Meaning |
+|-------------------|-------------------|
+| $> 0$ | Vectors point in a similar direction |
+| $= 0$ | Vectors are **perpendicular** (orthogonal) |
+| $< 0$ | Vectors point in generally opposite directions |
+
+### Symmetry of the Dot Product
+
+The dot product is **commutative**: $\vec{v} \cdot \vec{w} = \vec{w} \cdot \vec{v}$
+
+> **Why?** Although projecting $\vec{v}$ onto $\vec{w}$ looks visually different from projecting $\vec{w}$ onto $\vec{v}$, the resulting products are equal. When both vectors are unit length, their projections onto each other are symmetric. Scaling one vector by a constant scales both sides equally.
+
+### From 2D to 1D: The 1×2 Matrix
+
+A linear transformation from 2D to the number line (1D) is encoded by a **1×2 matrix**:
+
+$$\begin{bmatrix} u_1 & u_2 \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = u_1 x + u_2 y$$
+
+This is computationally **identical** to the dot product $\vec{u} \cdot \vec{v}$. This isn't a coincidence — it's the key to understanding duality.
+
+### Duality
+
+**Duality** is the natural correspondence between two seemingly different mathematical objects:
+
+| Object | Perspective |
+|--------|------------|
+| A **vector** $\vec{u}$ in 2D | A geometric arrow with magnitude and direction |
+| A **1×2 matrix** $[u_1 \; u_2]$ | A linear transformation projecting 2D space onto a number line |
+
+These are **the same thing** viewed from two angles:
+
+- Every vector $\vec{u}$ defines a linear transformation: "project onto $\vec{u}$ and scale"
+- Every linear transformation to 1D corresponds to a unique vector
+
+> **Why the formula works geometrically:** Taking the dot product with a unit vector $\hat{u}$ is the same as projecting onto the line spanned by $\hat{u}$. The 1×2 matrix $[u_1 \; u_2]$ literally performs this projection. The algebraic formula (multiply and add) and the geometric operation (project and scale) are two descriptions of the same linear transformation.
+
+<details>
+<summary><strong>💡 Summary of the Connection</strong></summary>
+
+1. A 1×2 matrix transforms 2D vectors into numbers
+2. Computing that matrix-vector product looks exactly like a dot product
+3. Therefore, dotting with a vector $\vec{u}$ = applying the linear transformation that projects space onto the line of $\vec{u}$
+4. This vector ↔ transformation correspondence is **duality**
 
 </details>
