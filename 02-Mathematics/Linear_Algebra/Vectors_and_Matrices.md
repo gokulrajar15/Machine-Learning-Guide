@@ -31,6 +31,11 @@ It's used to represent and manipulate data mathematically.
   - [Geometric Interpretation](#geometric-interpretation)
   - [Symmetry of the Dot Product](#symmetry-of-the-dot-product)
   - [Duality](#duality)
+- [Eigenvectors & Eigenvalues](#eigenvectors--eigenvalues)
+  - [Finding Eigenvectors & Eigenvalues](#finding-eigenvectors--eigenvalues)
+  - [Special Geometric Scenarios](#special-geometric-scenarios)
+  - [Eigenbasis & Diagonal Matrices](#eigenbasis--diagonal-matrices)
+- [Interview Explanations](#interview-explanations)
 
 ---
 
@@ -155,7 +160,7 @@ The span of a set of vectors is the collection of all possible vectors reachable
 
 ## Linear Transformations
 
-A linear transformation is a mapping between vector spaces that preserves vector addition and scalar multiplication. Geometrically, it performs operations like scaling, rotation, reflection, or shearing without breaking the linear structure of space.
+A linear transformation is a rule or function that maps vectors from one space to another while preserving the structural properties of vector addition and scalar multiplication
 
 > **Note:** A linear transformation preserves the structure of vector operations. Whether we add vectors before transformation or transform them individually and then add, the result remains the same. The same applies to scalar multiplication.
 
@@ -495,3 +500,147 @@ These are **the same thing** viewed from two angles:
 4. This vector ↔ transformation correspondence is **duality**
 
 </details>
+
+---
+
+## Eigenvectors & Eigenvalues
+
+When a linear transformation is applied, most vectors get knocked off their original span. But certain special vectors **stay on their own line** — the transformation only stretches, squishes, or reverses them without changing their direction.
+
+- **Eigenvector:** A nonzero vector that remains on the same span (line) after the transformation.
+- **Eigenvalue:** The scalar factor by which that eigenvector is stretched or squished during the transformation.
+
+$$A\vec{v} = \lambda\vec{v}$$
+
+Where $A$ is the transformation matrix, $\vec{v}$ is the eigenvector, and $\lambda$ is the eigenvalue.
+
+> **3D Rotation Example:** An eigenvector with eigenvalue 1 in a 3D rotation identifies the **axis of rotation** — the line that stays fixed while everything else rotates around it.
+
+---
+
+### Finding Eigenvectors & Eigenvalues
+
+Rewrite the eigen-equation using the identity matrix $I$:
+
+$$A\vec{v} = \lambda\vec{v} \quad \Rightarrow \quad (A - \lambda I)\vec{v} = \vec{0}$$
+
+For a **nonzero** $\vec{v}$ to satisfy this, the matrix $(A - \lambda I)$ must squish space into a lower dimension, which means:
+
+$$\det(A - \lambda I) = 0$$
+
+<details>
+<summary><strong>🧮 Step-by-Step Process</strong></summary>
+
+1. Set up $(A - \lambda I)$ by subtracting $\lambda$ from each diagonal entry of $A$
+2. Compute the determinant and set it equal to zero
+3. Solve the resulting polynomial — roots are the **eigenvalues**
+4. For each eigenvalue $\lambda$, plug back into $(A - \lambda I)\vec{v} = \vec{0}$ to find the corresponding **eigenvectors**
+
+</details>
+
+---
+
+### Special Geometric Scenarios
+
+| Scenario | Eigenvalues | Eigenvectors | Geometric Intuition |
+|----------|-------------|--------------|--------------------|
+| **90° Rotation (2D)** | $i, -i$ (complex) | None (real) | Every vector is knocked off its span — no line stays fixed |
+| **Shear** | $\lambda = 1$ (repeated) | Single line (e.g., x-axis) | Only vectors along one axis remain on their span |
+| **Uniform Scaling by 2** | $\lambda = 2$ | Every vector | All vectors stay on their span — everything just doubles in length |
+
+---
+
+### Eigenbasis & Diagonal Matrices
+
+If a transformation has enough eigenvectors to **span the entire space**, you can use them as a new coordinate basis — called an **eigenbasis**.
+
+In this eigenbasis, the transformation matrix becomes **diagonal**:
+
+$$\begin{bmatrix} \lambda_1 & 0 \\ 0 & \lambda_2 \end{bmatrix}$$
+
+The diagonal entries are the eigenvalues — each basis vector simply gets scaled.
+
+> **Why this matters:** Computing $M^{100}$ with a general matrix is extremely expensive. With a diagonal matrix, you just raise each diagonal entry to the 100th power:
+
+$$\begin{bmatrix} \lambda_1^{100} & 0 \\ 0 & \lambda_2^{100} \end{bmatrix}$$
+
+<details>
+<summary><strong>⚡ Diagonalization Workflow</strong></summary>
+
+1. Find the eigenvectors of $A$ and form a change-of-basis matrix $P$
+2. Convert to eigenbasis: $D = P^{-1}AP$ (diagonal matrix)
+3. Compute the power: $D^n$ (trivial — just raise each eigenvalue)
+4. Convert back: $A^n = P D^n P^{-1}$
+
+This bypasses immense amounts of matrix multiplication.
+
+</details>
+
+---
+
+## Interview Explanations
+
+Concise answers to common interview questions on linear algebra fundamentals.
+
+---
+
+### Q: What is a matrix and what does it represent?
+
+> A matrix is a rectangular grid of numbers that represents a **linear transformation**. Each column tells you where a basis vector lands after the transformation. So a 2×2 matrix completely describes how 2D space gets stretched, rotated, or squished — you just need to know where $\hat{i}$ and $\hat{j}$ end up.
+
+---
+
+### Q: What is the rank of a matrix?
+
+> The rank is the **number of dimensions in the output** after the transformation. If a 3×3 matrix has rank 2, it means the transformation collapses 3D space onto a 2D plane. Rank tells you how much "information" the transformation preserves. A full-rank matrix preserves all dimensions and has an inverse.
+
+---
+
+### Q: Explain eigenvalues and eigenvectors.
+
+> Most vectors change direction when you apply a transformation. An **eigenvector** is special — it stays on the same line it was on before; the transformation only scales it. The **eigenvalue** is that scaling factor.
+>
+> For example, if I apply a transformation and a vector just gets doubled in length without rotating, that vector is an eigenvector with eigenvalue 2. They reveal the "natural axes" of a transformation — the directions along which the transformation acts most simply.
+
+---
+
+### Q: What is a system of linear equations and how does it connect to matrices?
+
+> A system of linear equations asks: "What input gives me this specific output?" When you write it as $A\vec{x} = \vec{b}$, you're asking: "What vector $\vec{x}$, when transformed by matrix $A$, lands on $\vec{b}$?"
+>
+> If the matrix is invertible ($\det \neq 0$), there's exactly one answer: $\vec{x} = A^{-1}\vec{b}$. If the determinant is zero, the transformation squishes space and you either have no solution or infinitely many.
+
+---
+
+### Q: What is a vector space?
+
+> A vector space is a collection of vectors where you can **add** any two vectors and **scale** any vector by a number, and the result always stays within the same collection. It must include the zero vector, and these operations must follow rules like commutativity and distributivity.
+>
+> Examples: all 2D vectors form a vector space; all 3D vectors form a vector space; even the set of all polynomials of degree ≤ n forms a vector space. The key subspaces we encounter are the **column space** (all possible outputs of a matrix) and the **null space** (all inputs that map to zero).
+
+---
+
+### Q: How do rank, null space, and invertibility connect?
+
+> They're all faces of the same coin:
+> - **Full rank** → null space is just $\{\vec{0}\}$ → matrix is invertible → unique solution to every $A\vec{x} = \vec{b}$
+> - **Not full rank** → null space is a line/plane → no inverse exists → the transformation loses information by collapsing a dimension
+>
+> The rank tells you what dimension the output lives in. The null space tells you what got "destroyed" (mapped to zero). Together they always add up to the number of columns (Rank-Nullity Theorem).
+
+---
+
+### Q: Why do eigenvalues matter beyond theory?
+
+> Eigenvalues tell you the **fundamental behavior** of a transformation:
+> - If all $|\lambda| < 1$: the system shrinks over time (stable)
+> - If any $|\lambda| > 1$: the system grows over time (unstable)
+> - If $\lambda = 0$: that direction gets completely collapsed
+>
+> They're essential in solving differential equations, analyzing stability of systems, computing matrix powers efficiently (via diagonalization), and understanding what directions a transformation "prefers."
+
+---
+
+### Q: What happens when a matrix has no real eigenvalues?
+
+> This means the transformation has **no fixed direction** in real space. A classic example is a 90° rotation — every vector gets moved off its line, so no real eigenvector exists. The eigenvalues become complex numbers ($i, -i$), which algebraically encode the rotational behavior. Complex eigenvalues always signal rotation-like action in the transformation.
