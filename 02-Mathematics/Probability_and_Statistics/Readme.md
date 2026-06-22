@@ -4,6 +4,22 @@ Probability is a branch of mathematics that deals with the study of random event
 
 ---
 
+## Table of Contents
+
+1. [Basics of Probability (Foundation)](#1-basics-of-probability-foundation)
+   - 1.1 [Sample Space and Events](#11-sample-space-and-events)
+   - 1.2 [Probability Rules: Addition and Multiplication](#12-probability-rules-addition-and-multiplication)
+   - 1.3 [Conditional Probability](#13-conditional-probability)
+   - 1.4 [Bayes' Theorem](#14-bayes-theorem)
+   - 1.5 [Random Variables and Probability Distributions](#15-random-variables-and-probability-distributions)
+   - 1.6 [Variance and Standard Deviation](#16-variance-and-standard-deviation)
+   - 1.7 [Binomial Distribution](#17-binomial-distribution)
+   - 1.8 [Poisson Distribution](#18-poisson-distribution)
+   - 1.9 [Normal Distribution](#19-normal-distribution)
+   - 1.10 [Hypothesis Testing](#110-hypothesis-testing)
+
+---
+
 ## 1. Basics of Probability (Foundation)
 
 ### 1.1 Sample Space and Events
@@ -64,6 +80,8 @@ Sample space: $S = \{1, 2, 3, 4, 5, 6\}$
 ---
 
 ### 1.2 Probability Rules: Addition and Multiplication
+
+> **Core Concept:** Understanding how to combine probabilities using addition and multiplication rules.
 
 These are the two most important rules in probability for calculating combined probabilities.
 
@@ -159,6 +177,8 @@ $$P(H \cap T) = \frac{1}{2} \times \frac{1}{2} = \frac{1}{4}$$
 
 ### 1.3 Conditional Probability
 
+> **Core Concept:** Calculating the probability of an event occurring given that another event has already occurred.
+
 **Definition:** Conditional probability helps determine the likelihood of an event $B$ occurring, given that another event $A$ has already happened. The shorthand notation is written as $P(B|A)$ (read as "probability of B given A").
 
 **Formula:**
@@ -232,8 +252,9 @@ $$P(B|A) = \frac{P(A \cap B)}{P(A)} = \frac{\frac{1}{6}}{\frac{1}{2}} = \frac{1}
 
 ---
 
-
 ### 1.4 Bayes' Theorem
+
+> **Core Concept:** Updating probabilities based on new evidence using reverse conditional probability.
 
 Bayes' Theorem is a mathematical formula used to calculate the probability of an event based on new evidence. It helps us update an existing probability when additional information becomes available.
 
@@ -252,10 +273,15 @@ Where:
 > Bayes' Theorem allows us to reverse conditional probabilities, providing a way to update our beliefs based on new evidence.
 
 
+**Key Distinction:**
+
 *Conditional probability defines the probability of an event given another event, whereas Bayes' theorem provides a way to calculate that conditional probability by reversing known probabilities and incorporating prior information.*
 
+---
 
 ### 1.5 Random Variables and Probability Distributions
+
+> **Core Concept:** Representing random outcomes numerically and understanding their probability distributions.
 
 Random variables are numerical representations of outcomes from random processes. They can be classified into two main types: discrete and continuous.
 
@@ -343,7 +369,7 @@ $$\frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}{6} + \frac{1}
 
 **Continuous Random Variables:** These variables can take on an infinite number of values within a given range. Examples include the height of individuals or the time taken to complete a task.
 
-#### Example: Height of Students (Continuous Random Variable)
+#### Example 3: Height of Students (Continuous Random Variable)
 
 Suppose we measure the height of students in a classroom.
 
@@ -357,7 +383,13 @@ $$X \in [0, \infty)$$
 
 Since height can take any value within a range, $X$ is a **continuous random variable**.
 
+---
+
 ### 1.6 Variance and Standard Deviation
+
+> **Core Concept:** Measuring the spread and dispersion of data around the mean.
+
+**Variance**
 
 Variance is the average of the squared differences between each data value and the mean.
 
@@ -370,6 +402,7 @@ Where:
 - $x_i$ = Each individual data point
 - $\mu$ = Mean of the data
 
+**Standard Deviation**
 
 Standard deviation measures the typical distance of data values from the mean.
 
@@ -383,7 +416,11 @@ Where:
 - A low standard deviation indicates that the data points are close to the mean.
 - A high standard deviation indicates that the data points are spread out over a wider range of values.
 
+---
+
 ### 1.7 Binomial Distribution
+
+> **Core Concept:** Probability of getting a specific number of successes in a fixed number of independent trials.
 
 The binomial distribution is a discrete probability distribution that describes the number of successes in a fixed number of independent Bernoulli trials, each with the same probability of success.
 
@@ -435,6 +472,8 @@ $$P(X = 3) = 0.3125 = \frac{5}{16}$$
 
 ### 1.8 Poisson Distribution
 
+> **Core Concept:** Probability of a given number of events occurring in a fixed interval when events happen independently at a constant rate.
+
 A Poisson distribution is used to find the probability of how many times an event occurs in a fixed interval of time, area, distance, or space, when the events happen randomly and independently.
 
 **Formula for Poisson Probability:**
@@ -445,7 +484,8 @@ Where:
 - $\lambda$ = average number of occurrences in the given interval
 
 
-#### Example: Poisson Distribution
+#### Example: Call Center Calls
+
 **Problem:** A call center receives an average of 3 calls per hour. What is the probability that they receive exactly 5 calls in the next hour?
 
 **Given:**
@@ -467,6 +507,8 @@ $$P(X = 5) \approx 0.1008$$
 ---
 
 ### 1.9 Normal Distribution
+
+> **Core Concept:** The bell-shaped curve that describes how data is distributed symmetrically around the mean.
 
 **Definition:** Normal distribution is a continuous probability distribution where data is symmetrically clustered around the mean, forming a bell-shaped curve. It is characterized by its mean ($\mu$) and standard deviation ($\sigma$).
 
@@ -536,14 +578,13 @@ The empirical rule, also known as the **68-95-99.7 rule**, tells you where most 
 
 ---
 
----
-
 ### 1.10 Hypothesis Testing
+
+> **Core Concept:** Statistical method to test claims about a population using sample data.
 
 Hypothesis testing is a statistical method used to make inferences or draw conclusions about a population based on sample data. It involves formulating two competing hypotheses and using sample data to determine which hypothesis is more likely to be true.
 
-
-**Hypotheses testing methods**
+**Common Hypothesis Testing Methods:**
 1. Z-test
 2. T-test
 3. Chi-square test
@@ -634,4 +675,22 @@ Alternatively, using the p-value approach:
 
 ---
 
+**Key Takeaway:**
+
 *Hypothesis testing is a statistical technique used to determine whether there is enough evidence in sample data to support a claim about a population is true or not. It involves formulating null and alternative hypotheses, selecting a significance level, calculating a test statistic, and making a decision based on the results.*
+
+---
+
+## Summary
+
+This comprehensive guide covers the fundamental concepts of probability and statistics, from basic probability rules to advanced topics like hypothesis testing. Each concept builds upon the previous ones, creating a solid foundation for statistical analysis and machine learning applications.
+
+**Key Topics Covered:**
+- ✅ Sample spaces, events, and basic probability rules
+- ✅ Conditional probability and Bayes' theorem
+- ✅ Random variables and probability distributions
+- ✅ Variance, standard deviation, and data dispersion
+- ✅ Binomial, Poisson, and Normal distributions
+- ✅ Hypothesis testing and statistical inference
+
+These concepts are essential for understanding data analysis, machine learning algorithms, and making data-driven decisions.
