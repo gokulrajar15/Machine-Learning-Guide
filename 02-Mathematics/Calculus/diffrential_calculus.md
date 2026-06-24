@@ -248,65 +248,79 @@ $$\frac{d}{dx}(5x-2)^3 = 3(5x-2)^2 \cdot 5 = 15(5x-2)^2$$
 
 #### Chain Rule - Intuitive Example
 
-Let's understand the chain rule intuitively with the simplest nested function:
+# Example 1: Chain Rule Forward
 
-$$y = (2x+1)^2$$
+Find the derivative of
 
-This is a nested function with **two layers**:
+$$y=(x^2+1)^5$$
 
-**Layer 1 (inside):**
-$$u = 2x + 1$$
+### Step 1: Identify the layers
 
-**Layer 2 (outside):**
-$$y = u^2$$
+Think of it as a machine inside a machine.
 
-The dependency chain is:
-$$x \rightarrow u \rightarrow y$$
+```
+x
+↓
+x²+1
+↓
+( )⁵
+```
 
-**Testing with a value:**
+Inner function:
 
-If $x = 3$:
-- Inside function: $u = 2(3) + 1 = 7$
-- Outside function: $y = 7^2 = 49$
+$$u=x^2+1$$
 
-Notice: x changed → that changed u → that changed y. The effect flows through a chain.
+Outer function:
 
-**Differentiating:**
+$$y=u^5$$
 
-Outside derivative:
-$$\frac{dy}{du} = 2u$$
+---
 
-Inside derivative:
-$$\frac{du}{dx} = 2$$
+### Step 2: Differentiate the outer function
 
-Chain Rule:
-$$\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx} = (2u)(2)$$
+Treat $u$ as a variable.
 
-Substitute $u = 2x + 1$:
-$$\frac{dy}{dx} = 2(2x+1) \cdot 2 = 4(2x+1)$$
+$$\frac{dy}{du}=5u^4$$
 
-**The Intuition:**
+---
 
-Suppose x increases by 1.
+### Step 3: Differentiate the inner function
 
-**Step 1: Inside function**
-- $u = 2x + 1$
-- When x increases by 1, u increases by **2**
+$$\frac{du}{dx}=2x$$
 
-**Step 2: Outside function**
-- $y = u^2$
-- Near $u = 7$, a 1-unit increase in u changes y by about $2u = 14$
-- But u isn't increasing by 1, it's increasing by **2**
+---
 
-**Total effect:**
-$$14 \times 2 = 28$$
+### Step 4: Multiply them
 
-This is exactly the Chain Rule: **outside effect × inside effect**
+Chain rule says:
 
-At $x = 3$:
-$$4(2(3)+1) = 28$$
+$$\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$$
 
-**Key insight:** The Chain Rule multiplies how much the outer function reacts by how much the inner function changes.
+So
+
+$$\frac{dy}{dx} = 5u^4(2x)$$
+
+Replace $u$:
+
+$$\boxed{\frac{dy}{dx}=10x(x^2+1)^4}$$
+
+---
+
+# Now Reverse It
+
+Suppose someone gives you
+
+$$\int 10x(x^2+1)^4\,dx$$
+
+Look carefully.
+
+This is exactly the derivative we just got!
+
+So the answer must be
+
+$$\boxed{(x^2+1)^5+C}$$
+
+Substitution is simply a systematic way to see this.
 
 ## Second Derivatives
 
