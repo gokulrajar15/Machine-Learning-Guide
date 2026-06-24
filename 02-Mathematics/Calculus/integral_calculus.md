@@ -9,8 +9,9 @@ Integral calculus is a branch of mathematics that deals with the concept of inte
 1. [Introduction to Integration](#introduction-to-integration)
 2. [Rules of Integration](#rules-of-integration)
 3. [Definite Integrals](#definite-integrals)
-4. [Intergration by Parts](#integration-by-parts)
+4. [Integration by Parts](#integration-by-parts)
 5. [Integration by Substitution](#integration-by-substitution)
+6. [Fundamental Theorems of Calculus](#fundamental-theorems-of-calculus)
 
 ---
 
