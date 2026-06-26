@@ -113,12 +113,19 @@ As x increases, y increases.
 
 ### What is a Limit?
 
-Sometimes we can't work something out directly, but we can see what it should be as we get closer and closer.
+A limit describes the behavior of a function as its input approaches a specific value from either side. It tells us what value the function is getting closer to, even if it doesn't actually reach that value.
 
 **Notation:**
 $$\lim_{x \to a} f(x) = L$$
 
-This means: As x gets close to a, f(x) gets close to L.
+This means: as x gets closer and closer to a, f(x) gets closer and closer to L.
+
+**Simple interview answer:**
+- A limit is the value a function is approaching when the input gets near a point.
+- It is about what happens as we get closer, not necessarily what happens at the point itself.
+
+**Think of it like this:**
+- You are walking toward a door. The limit is the door you are getting near, even if you stop one step before.
 
 ### Example: The Indeterminate Form
 
@@ -259,4 +266,35 @@ Mathematically, a function $f$ is continuous at a specific value $c$ within its 
 3. **The limit equals the actual value:** Written formally as:
 
 $$\lim_{x \to c} f(x) = f(c)$$
+
+**Simple interview answer:**
+- A function is continuous at a point when you can draw it there without lifting your pen.
+- It means the function has no hole, no jump, and no vertical break at that point.
+
+**Think of it like a road:**
+- Continuous means the road is smooth at that point.
+- Discontinuous means the road has a gap, a cliff, or a sudden jump.
+
+### Example of Continuity
+
+Function: $f(x) = x^2$
+
+At $x = 2$:
+- $f(2)$ is defined and equals 4.
+- $\\lim_{x \to 2} x^2 = 4$.
+- The limit equals the function value, so $f(x)$ is continuous at 2.
+
+### Example of Discontinuity
+
+Function: $f(x) = \frac{1}{x}$
+
+At $x = 0$:
+- $f(0)$ is not defined.
+- The limit does not exist because the function goes to $+\infty$ on one side and $-\infty$ on the other.
+- Therefore, $f(x)$ is discontinuous at 0.
+
+**Quick interview tip:**
+- Say: "Continuity means the function's value and its approaching value match at the point."
+- Add: "If either the value is missing or the left and right approach are different, it is not continuous."
+
 
