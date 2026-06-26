@@ -1,8 +1,7 @@
 # Integral Calculus (Integration)
 
-Integral calculus is a branch of mathematics that deals with the concept of integration, which is the process of finding the integral of a function. It is closely related to differential calculus and is used to calculate areas, volumes, and other quantities that can be represented as the accumulation of infinitesimal changes.
+Integral calculus is a branch of calculus focused on accumulation and finding the area under a curve. It is the inverse process of differentiation. The two primary types are indefinite integrals (which find the antiderivative of a function) and definite integrals (which calculate a specific numerical value over a bounded interval).
 
----
 
 ## Table of Contents
 

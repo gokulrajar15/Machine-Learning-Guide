@@ -2,6 +2,8 @@
 
 Probability is a branch of mathematics that deals with the study of random events and the likelihood of their occurrence. It provides a framework for quantifying uncertainty and making predictions based on available information.
 
+Statistics is the branch of mathematics and science focused on collecting, analyzing, interpreting, organizing, and presenting data. It serves as a tool to extract meaningful insights and make informed decisions in the face of uncertainty
+
 ---
 
 ## Table of Contents
