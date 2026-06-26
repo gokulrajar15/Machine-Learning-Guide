@@ -341,6 +341,8 @@ $$f''(x) = 6x$$
 
 ## Partial Derivatives(Multi-Variable Calculus)
 
+Partial derivatives are used when dealing with functions of multiple variables. Instead of finding the derivative with respect to all variables at once, we take the derivative with respect to one variable while keeping the others constant.
+
 A partial derivative is a derivative where we hold some variables constant.
 
 ![partial derivative on surface](https://www.mathsisfun.com/calculus/images/partial-derivative.gif)
